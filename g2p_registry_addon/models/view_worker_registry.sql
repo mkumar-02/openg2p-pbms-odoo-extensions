@@ -9,7 +9,17 @@ SELECT
     province_id     AS province_id,
     district_id     AS district_id,
     constituency_id AS constituency_id,
-    ward_id         AS ward_id
+    ward_id         AS ward_id,
+    worker_age      AS worker_age,
+    nature_of_employement AS nature_of_employment,
+    months_without_job AS months_without_job,
+    duration_of_job_seeking AS duration_of_job_seeking,
+    relocation_year AS relocation_year,
+    duration_calculate AS relocation_duration_year,
+    relocation_period_str AS relocation_duration_month,
+    hh_has_disabilities AS hh_has_disabilities,
+    gender AS gender
+    
 FROM res_partner
 WHERE is_registrant = True 
   AND is_group = False 
