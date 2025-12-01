@@ -16,7 +16,7 @@ class G2PRegistryWorker(models.Model):
     ward_id = fields.Integer(string="Ward ID")
     worker_age = fields.Integer(string="Worker Age")
     nature_of_employement = fields.Selection(
-        [("employee", "Employee"), ("self_employed", "Self Employed")],
+        selection=[("employee", "Employee"), ("self_employed", "Self Employed")],
     )
     months_without_job = fields.Integer(string="Months Without Job")
     duration_of_job_seeking = fields.Integer(string="Duration of Job Seeking")
@@ -26,9 +26,9 @@ class G2PRegistryWorker(models.Model):
     duration_calculate = fields.Char(string="Duration Calculate")
     relocation_period_str = fields.Char(string="Relocation Period Str")
     hh_has_disabilities = fields.Selection(
-        [("yes", "Yes"), ("no", "No")],
+        selection=[("yes", "Yes"), ("no", "No")],
     )
     gender = fields.Selection(
-        [("male", "Male"), ("female", "Female")],
+        selection=[("male", "Male"), ("female", "Female")],
     )
     
