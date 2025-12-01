@@ -25,6 +25,7 @@ class G2PRegistryWorker(models.Model):
     )
     duration_calculate = fields.Char(string="Duration Calculate")
     relocation_period_str = fields.Char(string="Relocation Period Str")
+    relocation_month = fields.Integer()
     hh_has_disabilities = fields.Selection(
         selection=[("yes", "Yes"), ("no", "No")],
     )

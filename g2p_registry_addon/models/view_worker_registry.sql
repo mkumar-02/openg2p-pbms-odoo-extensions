@@ -17,6 +17,11 @@ SELECT
     relocation_year AS relocation_year,
     duration_calculate AS relocation_duration_year,
     relocation_period_str AS relocation_duration_month,
+    CASE 
+        WHEN relocation_year IS NULL THEN NULL
+        WHEN EXTRACT(YEAR FROM CURRENT_DATE) - relocation_year = 0 THEN 0
+        ELSE (EXTRACT(YEAR FROM CURRENT_DATE) - relocation_year) * 12
+    END AS relocation_month,
     hh_has_disabilities AS hh_has_disabilities,
     gender AS gender
     
