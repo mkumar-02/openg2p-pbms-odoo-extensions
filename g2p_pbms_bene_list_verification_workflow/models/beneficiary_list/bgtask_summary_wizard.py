@@ -17,6 +17,7 @@ class G2PBGTaskSummaryWizard(models.TransientModel):
 
     @api.depends("program_id", "verification_ids")
     def _compute_show_verification_stage_enrolment_button(self):
+        # TODO: Bypass the verification stage if admin is logged in
         for rec in self:
             show_button = False
             
@@ -28,13 +29,17 @@ class G2PBGTaskSummaryWizard(models.TransientModel):
                     required_reviews = 0
                 verification_count = len(rec.verification_ids)
                 if required_reviews > verification_count:
-                    state, group = program.entitlement_verification_ids.get_details_for_next_verification(rec.verification_state)
-                    if group in rec.env.user.groups_id.ids:
-                        show_button = True
+                    if program.entitlement_verification_ids:
+                        state, group = program.entitlement_verification_ids.get_details_for_next_verification(rec.verification_state)
+                        if group in rec.env.user.groups_id.ids:
+                            show_button = True
+                    else:
+                        show_button = True if rec.env.user.has_group('g2p_pbms.group_beneficiary_list_verifier') else False
             rec.show_verification_stage_enrolment_button = show_button
 
     @api.depends("program_id", "verification_ids")
     def _compute_show_verification_stage_disbursement_button(self):
+        # TODO: Bypass the verification stage if admin is logged in
         for rec in self:
             show_button = False
 
@@ -46,19 +51,13 @@ class G2PBGTaskSummaryWizard(models.TransientModel):
                     required_reviews = 0
                 verification_count = len(rec.verification_ids)
                 if required_reviews > verification_count:
-                    state, group = program.disbursement_verification_ids.get_details_for_next_verification(rec.verification_state)
-                    if group in rec.env.user.groups_id.ids:
-                        show_button = True
+                    if program.disbursement_verification_ids:
+                        state, group = program.disbursement_verification_ids.get_details_for_next_verification(rec.verification_state)
+                        if group in rec.env.user.groups_id.ids:
+                            show_button = True
+                    else:
+                        show_button = True if rec.env.user.has_group('g2p_pbms.group_beneficiary_list_verifier') else False
             rec.show_verification_stage_disbursement_button = show_button
-
-    @api.model
-    def create(self, vals):
-        """Override create to trigger recompute of button visibility"""
-        result = super().create(vals)
-        # Force recompute to ensure button visibility is up-to-date
-        result._compute_show_verification_stage_enrolment_button()
-        result._compute_show_verification_stage_disbursement_button()
-        return result
 
     def action_record_verifications(self):
         allowed_group = 'g2p_pbms.group_beneficiary_list_verifier'
