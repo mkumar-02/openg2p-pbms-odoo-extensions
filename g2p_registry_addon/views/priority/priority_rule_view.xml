@@ -19,6 +19,14 @@
                        options="{'model': 'g2p.register.households', 'allowed_fields': ['priority_rank']}"
                        invisible="target_registry != 'households'"/>
 
+                <field name="pbms_domain" widget="domain"
+                       options="{'model': 'g2p.register.individual', 'allowed_fields': ['priority_rank']}"
+                       invisible="target_registry != 'individual'"/>
+
+                <field name="pbms_domain" widget="domain"
+                       options="{'model': 'g2p.register.household', 'allowed_fields': ['priority_rank']}"
+                       invisible="target_registry != 'household'"/>
+
             </xpath>
         </field>
     </record>

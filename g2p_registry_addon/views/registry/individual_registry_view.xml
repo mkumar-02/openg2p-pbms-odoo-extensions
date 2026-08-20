@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_g2p_register_individual" model="ir.actions.act_window">
+        <field name="name">NSR Individual</field>
+        <field name="res_model">g2p.register.individual</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="view_g2p_register_individual_form" model="ir.ui.view">
+        <field name="name">g2p.register.individual.form</field>
+        <field name="model">g2p.register.individual</field>
+        <field name="arch" type="xml">
+            <form string="NSR Individual" create="0">
+                <sheet>
+                    <group string="Identity">
+                        <field name="internal_record_id"/>
+                        <field name="functional_record_id"/>
+                        <field name="link_internal_record_id"/>
+                        <field name="record_name"/>
+                        <field name="record_status"/>
+                        <field name="record_status_reason"/>
+                        <field name="foundational_id"/>
+                        <field name="foundational_id_masked"/>
+                        <field name="foundational_id_verification_status"/>
+                        <field name="identity_evidence_type"/>
+                    </group>
+                    <group string="Person">
+                        <field name="full_name"/>
+                        <field name="first_name"/>
+                        <field name="middle_name"/>
+                        <field name="last_name"/>
+                        <field name="given_name"/>
+                        <field name="prefix"/>
+                        <field name="suffix"/>
+                        <field name="gender"/>
+                        <field name="birth_date"/>
+                        <field name="estimated_age"/>
+                        <field name="age_method"/>
+                        <field name="marital_status"/>
+                        <field name="citizenship_category"/>
+                        <field name="occupation"/>
+                        <field name="income_level"/>
+                        <field name="language_code"/>
+                        <field name="registration_date"/>
+                    </group>
+                    <group string="Household Membership">
+                        <field name="relationship_to_head"/>
+                        <field name="residency_status"/>
+                        <field name="dependency_indicator"/>
+                    </group>
+                    <group string="Contact">
+                        <field name="preferred_contact_method"/>
+                        <field name="contact_person_name"/>
+                    </group>
+                    <group string="Vulnerability">
+                        <field name="disability_status"/>
+                        <field name="plw_status"/>
+                        <field name="plw_status_date"/>
+                        <field name="orphanhood_flag"/>
+                        <field name="chronic_illness_flag"/>
+                        <field name="displacement_status"/>
+                        <field name="pastoralist_classification"/>
+                        <field name="high_mobility_indicator"/>
+                    </group>
+                    <group string="Livelihood">
+                        <field name="primary_livelihood"/>
+                        <field name="secondary_livelihood"/>
+                        <field name="employment_status"/>
+                        <field name="coping_strategies_index"/>
+                    </group>
+                    <group string="Geo">
+                        <field name="latitude"/>
+                        <field name="longitude"/>
+                        <field name="altitude"/>
+                        <field name="plus_code"/>
+                        <field name="address_line_1"/>
+                        <field name="address_line_2"/>
+                        <field name="postal_code"/>
+                        <field name="country_code"/>
+                        <field name="geo_lowest_level_value_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_g2p_register_individual_tree" model="ir.ui.view">
+        <field name="name">g2p.register.individual.tree</field>
+        <field name="model">g2p.register.individual</field>
+        <field name="arch" type="xml">
+            <tree string="NSR Individual" create="0">
+                <field name="internal_record_id"/>
+                <field name="functional_record_id"/>
+                <field name="full_name"/>
+                <field name="gender"/>
+                <field name="estimated_age"/>
+                <field name="relationship_to_head"/>
+                <field name="disability_status"/>
+                <field name="citizenship_category"/>
+                <field name="primary_livelihood"/>
+                <field name="employment_status"/>
+                <button name="action_open_view" type="object" class="fa fa-eye" title="View"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -19,6 +19,14 @@
                        options="{'model': 'g2p.register.households'}"
                        invisible="target_registry != 'households'"/>
 
+                <field name="pbms_domain" widget="domain"
+                       options="{'model': 'g2p.register.individual'}"
+                       invisible="target_registry != 'individual'"/>
+
+                <field name="pbms_domain" widget="domain"
+                       options="{'model': 'g2p.register.household'}"
+                       invisible="target_registry != 'household'"/>
+
             </xpath>
         </field>
     </record>

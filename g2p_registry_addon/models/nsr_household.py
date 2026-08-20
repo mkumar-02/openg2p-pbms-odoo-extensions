@@ -3,11 +3,12 @@ from odoo import models, fields
 from .registry import G2PRegistry
 
 
-class G2PRegisterHousehold(models.Model):
-    _name = "g2p.register.households"
-    _description = "Register Household"
+class G2PRegisterNSRHousehold(models.Model):
+    _name = "g2p.register.household"
+    _description = "NSR Household"
     _inherit = "g2p.registry"
     _table = "g2p_register_households"
+    _auto = False
 
     # G2PRegister fields
     functional_record_id = fields.Char(string="Functional Record ID", index=True)
@@ -43,7 +44,7 @@ class G2PRegisterHousehold(models.Model):
     geo_lowest_level_value_id = fields.Char(string="Geo Lowest Level Value ID", index=True)
     geo_code_hierarchy_json = fields.Json(string="Geo Code Hierarchy")
 
-    # Household head
+    # Headship & composition
     household_head_internal_record_id = fields.Char(
         string="Household Head Internal Record ID", index=True
     )
@@ -58,8 +59,9 @@ class G2PRegisterHousehold(models.Model):
         ],
         string="Headship Type",
     )
+    husband_dead = fields.Boolean(string="Is Husband Dead")
+    husband_dead_date = fields.Date(string="Husband Death Date")
 
-    # Household composition
     size_total = fields.Integer(string="Total Size")
     size_adults = fields.Integer(string="Adults")
     size_children_u5 = fields.Integer(string="Children Under 5")
@@ -123,7 +125,7 @@ class G2PRegisterHousehold(models.Model):
     rooms_count = fields.Integer(string="Rooms Count")
     overcrowding_indicator = fields.Float(string="Overcrowding Indicator")
 
-    # Utilities
+    # Basic services
     water_source_type = fields.Selection(
         selection=[
             ("PIPED", "Piped"),
@@ -180,6 +182,3 @@ class G2PRegisterHousehold(models.Model):
         ],
         string="Mobile Phone Type",
     )
-
-    husband_dead = fields.Boolean(string="Is Husband Dead")
-    husband_death_date = fields.Datetime(string="Husband Death Date")

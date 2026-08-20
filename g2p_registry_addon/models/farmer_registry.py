@@ -7,6 +7,7 @@ class G2PFarmerRegistry(models.Model):
     _name = "g2p.register.farmer"
     _description = "Farmer Registry"
     _inherit = "g2p.registry"
+    _table = "g2p_register_farmers"
 
     # G2PRegister fields
     functional_record_id = fields.Char(string="Functional Record ID", index=True)
