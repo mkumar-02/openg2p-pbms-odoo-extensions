@@ -34,7 +34,7 @@
                 </div>
             </t>
 
-            <t t-if="state.target_registry === 'households' || state.target_registry === 'household'">
+            <t t-if="state.target_registry === 'household'">
                 <div class="mb-2 text-end">
                     <button type="button" class="btn btn-outline-secondary btn-sm" t-on-click="toggleColumns">
                         <i t-attf-class="fa #{state.showAllColumns ? 'fa-compress' : 'fa-expand'} me-1"/>
@@ -71,7 +71,19 @@
                                 <th class="px-2 py-1">Primary Livelihood</th>
                                 <th class="px-2 py-1">Employment</th>
                             </t>
-                            <t t-if="state.target_registry === 'households' || state.target_registry === 'household'">
+                            <t t-if="state.target_registry === 'households'">
+                                <th class="px-2 py-1">Internal ID</th>
+                                <th class="px-2 py-1">Functional ID</th>
+                                <th class="px-2 py-1">Head</th>
+                                <th class="px-2 py-1 text-center">Size</th>
+                                <th class="px-2 py-1 text-center">Children</th>
+                                <th class="px-2 py-1 text-center">Elderly</th>
+                                <th class="px-2 py-1 text-center">Female</th>
+                                <th class="px-2 py-1 text-center">Male</th>
+                                <th class="px-2 py-1 text-center">Other Land Owner</th>
+                                <th class="px-2 py-1">Country</th>
+                            </t>
+                            <t t-if="state.target_registry === 'household'">
                                 <th class="px-2 py-1">Internal ID</th>
                                 <th class="px-2 py-1">Functional ID</th>
                                 <th class="px-2 py-1">Head Name</th>
@@ -130,7 +142,23 @@
                                         <td class="px-2 py-1"><t t-esc="record.primary_livelihood"/></td>
                                         <td class="px-2 py-1"><t t-esc="record.employment_status"/></td>
                                     </t>
-                                    <t t-if="state.target_registry === 'households' || state.target_registry === 'household'">
+                                    <t t-if="state.target_registry === 'households'">
+                                        <td class="px-2 py-1 text-muted"><t t-esc="record.internal_record_id"/></td>
+                                        <td class="px-2 py-1 fw-semibold text-primary"><t t-esc="record.functional_record_id"/></td>
+                                        <td class="px-2 py-1"><t t-esc="record.household_head"/></td>
+                                        <td class="px-2 py-1 text-center"><t t-esc="record.size_of_group"/></td>
+                                        <td class="px-2 py-1 text-center"><t t-esc="record.number_of_children"/></td>
+                                        <td class="px-2 py-1 text-center"><t t-esc="record.number_of_elderly_members"/></td>
+                                        <td class="px-2 py-1 text-center"><t t-esc="record.number_of_female_members"/></td>
+                                        <td class="px-2 py-1 text-center"><t t-esc="record.number_of_male_members"/></td>
+                                        <td class="px-2 py-1 text-center">
+                                            <span t-attf-class="badge #{record.other_land_owner ? 'bg-warning' : 'bg-secondary'}">
+                                                <t t-esc="record.other_land_owner ? 'Yes' : 'No'"/>
+                                            </span>
+                                        </td>
+                                        <td class="px-2 py-1"><t t-esc="record.country_code"/></td>
+                                    </t>
+                                    <t t-if="state.target_registry === 'household'">
                                         <td class="px-2 py-1 text-muted"><t t-esc="record.internal_record_id"/></td>
                                         <td class="px-2 py-1 fw-semibold text-primary"><t t-esc="record.functional_record_id"/></td>
                                         <td class="px-2 py-1"><t t-esc="record.household_head_name"/></td>
@@ -160,7 +188,11 @@
                         </t>
                         <t t-else="">
                             <tr>
-                                <td t-if="state.target_registry === 'households' || state.target_registry === 'household'" t-att-colspan="state.showAllColumns ? 21 : 10" class="text-center text-muted py-4">
+                                <td t-if="state.target_registry === 'household'" t-att-colspan="state.showAllColumns ? 21 : 10" class="text-center text-muted py-4">
+                                    <i class="fa fa-inbox fa-2x d-block mb-2"/>
+                                    No records found.
+                                </td>
+                                <td t-elif="state.target_registry === 'households'" colspan="10" class="text-center text-muted py-4">
                                     <i class="fa fa-inbox fa-2x d-block mb-2"/>
                                     No records found.
                                 </td>
